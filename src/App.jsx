@@ -31,11 +31,51 @@ function App() {
     console.log(data);
   }
 
+
+  const countSecond1 = (i) => {
+    return new Promise ((resolve)=>{
+
+    
+    if(i<6){
+      setTimeout(()=>{
+        console.log(i, 'count 1');
+        i++
+        countSecond1(i);
+      }, 1000);
+    }
+      resolve(true);
+  })
+  }
+
+  const countSecond2 = (i) => {
+    return new Promise((resolve)=>{
+      if(i<10){
+        setTimeout(()=>{
+          console.log(i, 'count 2')
+          i++
+          countSecond2(i);
+        }, 1000);
+      }
+        resolve(true)
+    })
+  }
+
+  const waitForPromise = async () => {
+    // countSecond1(1)
+    // countSecond2(1)
+    const something = await Promise.all([countSecond1(1), countSecond2(2)])
+    console.log(something)
+    await getData()
+    
+
+  }
+
   useEffect(() => {
     
     
-    getData();
+    // getData();
     // getCacheData();
+    waitForPromise();
     return () => {
       
     }
