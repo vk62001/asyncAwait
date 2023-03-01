@@ -17,13 +17,15 @@ function App() {
     console.log(data);
     localStorage.setItem('todo', JSON.stringify(data));
     count()
-    getCacheData()
   };
   
-  const count = () => {
+  const count = async () => {
     for(let i=0; i<=5; i++ ){
+      await delay(1000)
       console.log(i);
     }
+    await delay(1000)
+    getCacheData()
   }
 
   const getCacheData = async () =>{
