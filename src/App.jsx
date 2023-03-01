@@ -26,45 +26,27 @@ function App() {
     }
   }
 
-  const getCacheData = () =>{
+  const getCacheData = async () =>{
+    await delay(4000) // wait 4 seconds for local storage
     const data =  localStorage.getItem('todo');
     console.log(data);
   }
 
 
-  const countSecond1 = (i) => {
-    return new Promise ((resolve)=>{
-
-    
-    if(i<6){
-      setTimeout(()=>{
-        console.log(i, 'count 1');
-        i++
-        countSecond1(i);
-      }, 1000);
-    }
-      resolve(true);
-  })
+  const delay = (ms) => {
+    return new Promise(resolve=>setTimeout(resolve, ms));
   }
 
-  const countSecond2 = (i) => {
-    return new Promise((resolve)=>{
-      if(i<10){
-        setTimeout(()=>{
-          console.log(i, 'count 2')
-          i++
-          countSecond2(i);
-        }, 1000);
-      }
-        resolve(true)
-    })
-  }
 
   const waitForPromise = async () => {
-    // countSecond1(1)
-    // countSecond2(1)
-    const something = await Promise.all([countSecond1(1), countSecond2(2)])
-    console.log(something)
+    console.log("Iniciando temporizador 1...");
+    await delay(2000); // wait 2 seconds
+    console.log("Temporizador 1 finalizado.");
+
+    console.log("Iniciando temporizador 2...");
+    await delay(5000); // wait 5 seconds
+    console.log("Temporizador 2 finalizado.");
+
     await getData()
     
 
